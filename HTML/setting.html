@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setting</title>
+  <link rel="stylesheet" href="../css/bootstrap.css">
+
+  <style>
+    input {
+      width: 50% !important;
+      border-top-style: hidden;
+      border-right-style: hidden;
+      border-left-style: hidden;
+      border-bottom-style: groove;
+      background-color: rgb(255, 255, 255);
+      padding: 25px 10px 20px 0px;
+      margin-left: 15px
+    }
+
+    #setting {
+      margin: 40px 18px 100px 18px;
+      padding: 10px 50px 10px 50px;
+    }
+
+    #addMember,
+    #SaveChanges {
+      background: rgb(11, 94, 215);
+      border: none;
+      color: #fff;
+      margin-top: 7px;
+      margin-right: 2px;
+      padding: 10px 20px 10px 20px;
+    }
+
+    #Cancel {
+      background: #fff;
+      color: rgb(46, 45, 45);
+      margin-top: 7px;
+      margin-right: 2px;
+      padding: 10px 20px 10px 20px;
+    }
+
+    #logoutBtn {
+      background: rgb(43, 230, 174);
+      border: none;
+      color: #fff;
+      /* margin-top: 5px;
+        margin-right: 0px; */
+      padding: 8px 20px 10px 20px;
+    }
+
+    footer {
+      border: 1px solid black;
+      background-color: #2ae27d;
+      width: 100%;
+      text-align: center;
+      /* height: auto; */
+      color: #ffffff;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: rgb(217, 236, 241)!important;">
+    <a class="navbar-brand" href="#"><b>Team Reporter</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="./home.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./TeamOverView.html">Team/overview</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        <button type="submit " id="logoutBtn" onclick="logout() ">Logout</button>
+      </span>
+    </div>
+  </nav>
+  <ul class="nav nav-tabs">
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="./setting.html"><b style="color: black;">Setting</b></a>
+    </li> -->
+  </ul>
+  <div id="setting">
+    <h4>Question's:</h4>
+    <form>
+      <input type="text" id="team" class="Team" placeholder="Team Name" required>
+      <div class="form-question">
+        <!-- <label for="question">Question 1:</label><br> -->
+        <input type="text" class="question" id="question1" placeholder="Enter your question"><br>
+
+        <!-- <label for="question">Question 2:</label><br> -->
+        <input type="text" class="question" id="question2" placeholder="Enter your question"><br>
+
+        <!-- <label for="question">Question 3:</label><br> -->
+        <input type="text" class="question" id="question3" placeholder="Enter your question"><br>
+
+      </div>
+    </form>
+    <button type="button" id="SaveChanges" onclick="savechanges()">Save changes</button>
+    <button type="reset" id="Cancel" onclick="cancel()">Cancel</button>
+  </div>
+
+
+  <!-- footer -->
+  <footer>
+    <p>Designed by M.Areeb<br>
+      <a href="#">m.areebkhan125@gmail.com</a>
+    </p>
+  </footer>
+
+  <script>
+    let teamname;
+    function savechanges() {
+      let loginperson = localStorage.getItem("Loginuser")
+      let loginpersonVal = JSON.parse(loginperson);
+      let user = loginpersonVal.person1;
+      // console.log(user)
+      teamname = document.getElementById("team").value;
+      let question1 = document.getElementById("question1").value;
+      let question2 = document.getElementById("question2").value;
+      let question3 = document.getElementById("question3").value;
+
+      //store data in session storage
+      if (question1 == "" || question2 == "" || question3 == "") {
+        alert("please fill all answer feild")
+      } else {
+        sessionStorage.setItem(teamname, JSON.stringify({
+          user,
+          teamname,
+          q1: question1,
+          q2: question2,
+          q3: question3,
+
+        }))
+      };
+      document.getElementById("team").value = "";
+      document.getElementById("question1").value = ""
+      document.getElementById("question2").value = ""
+      document.getElementById("question3").value = ""
+    }
+    function cancel() {
+      document.getElementById("team").value = "";
+      document.getElementById("question1").value = ""
+      document.getElementById("question2").value = ""
+      document.getElementById("question3").value = ""
+    }
+
+  </script>
+
+  <script src="../js/app.js"></script>
+  <!-- bootsrap link -->
+  <script src="../js/jquery-3.4.1.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+</body>
+
+</html>

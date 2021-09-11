@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team/OverView</title>
+  <link rel="stylesheet" href="../css/style2.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+
+<style>
+  #quesAns {
+    font-size: medium !important;
+    margin-left: 105px;
+    margin-bottom: 30%;
+    /* text-align: center; */
+    /* border: 1px solid black; */
+  }
+
+  input {
+    width: 60%;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: rgb(255, 255, 255);
+    padding: 25px 10px 10px 0px;
+    /* margin-left: 50px; */
+  }
+
+  #submitAnswer {
+    /* margin-left: 105px; */
+    background: rgb(11, 94, 215);
+    border: none;
+    color: #fff;
+    padding: 8px 20px 10px 20px;
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: rgb(51, 174, 211)!important;">
+    <a class="navbar-brand" href="#"><b>Team Reporter</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="./home.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./TeamOverView.html">Team/Overview</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        <button type="submit " id="logoutBtn" onclick="logout() ">Logout</button>
+      </span>
+    </div>
+  </nav>
+  <!-- <ul class="nav nav-tabs"> -->
+  <!-- <li class="nav-item">
+          <a class="nav-link" href="./setting.html"><b>Setting</b></a>
+        </li> -->
+  <!-- </ul> ->
+
+      <!-- Teaam ques/ans -->
+  <div>
+    <h3 id="reports">QUESTION-ANSWER</h3>
+  </div>
+  <h6 id="date"></h6>
+  <div id="quesAns">
+    <h3 id="TeamName">TEAM NAME:</h3>
+    <!-- <h5 id="yourname">Enter your Name:</h5> -->
+    <h5 id="name"><input id="Studentname" type="text" placeholder="Enter your name" /> </h5>
+
+    <h5 id="firstques">Q:</h5>
+    <h5><input id="firstAns" type="text" placeholder="Answer" /> </h5>
+
+    <h5 id="secondques">Q:</h5>
+    <h5><input id="secondAns" type="text" placeholder="Answer" /> </h5>
+
+    <h5 id="thirdques">Q:</h5>
+    <h5><input id="thirdAns" type="text" placeholder="Answer" /> </h5>
+
+    <button type="button" id="submitAnswer" onclick="submitAnswer()">Submit</button>
+  </div>
+
+
+  <!-- footer -->
+  <footer>
+    <p>Designed by M.Areeb<br>
+      <a href="#">m.areebkhan125@gmail.com</a>
+    </p>
+  </footer>
+  <script>
+
+    var Studentname;
+    function submitAnswer() {
+      let loginperson = localStorage.getItem("Loginuser")
+      let loginpersonVal = JSON.parse(loginperson);
+      let user = loginpersonVal.person1;
+      // console.log(user)
+
+      Studentname = document.getElementById("Studentname").value
+      const firstAns = document.getElementById("firstAns").value;
+      const secondAns = document.getElementById("secondAns").value;
+      const thirdAns = document.getElementById("thirdAns").value;
+      if (firstAns == "" || secondAns == "" || thirdAns == "") {
+        alert("please fill all answer feild")
+      } else {
+        localStorage.setItem(Studentname, JSON.stringify(
+          {
+            user,
+            Studentname,
+            firstAns,
+            secondAns,
+            thirdAns,
+          }
+        ))
+      }
+      document.getElementById("Studentname").value = ""
+      document.getElementById("firstAns").value = "";
+      document.getElementById("secondAns").value = "";
+      document.getElementById("thirdAns").value = "";
+    }
+    (function () {
+
+
+      allDataKeys12 = Object.keys(sessionStorage);
+      allDataKeys12.map((key1) => {
+        const val12 = JSON.parse(sessionStorage.getItem(key1));
+        //             let firstques=document.getElementById("firstques");
+        const teamname = val12.teamname;
+        const q1 = val12.q1;
+        const q2 = val12.q2;
+        const q3 = val12.q3;
+        if (q1 == undefined || q2 == undefined || q3 == undefined) {
+          // console.log("no question")
+        } else {
+          // var mi = document.createElement("INPUT");
+          // mi.setAttribute('type', 'text');
+          // mi.setAttribute('value', 'default')
+
+
+          // let fQ=document.getElementById("firstques")
+          // let div = document.createElement("div");
+          // div.id = "content";
+          // // div.style.border = "2px solid black";
+          // div.style.marginTop = "10px";
+          // div.style.marginRight = "50px";
+          // div.style.marginLeft = "50px";
+          // div.style.padding = "2px 0 40px 15px"; 
+          // div.style.textAlign="start"
+          // div.innerHTML = `${q1}<br><br> ${q2}<br> ${q3}`;
+          // fQ.appendChild(div)
+
+
+
+
+
+          TeamName.innerHTML += teamname
+          firstques.innerHTML += q1;
+          secondques.innerHTML += q2
+          thirdques.innerHTML += q3
+        }
+      })
+    })()
+  </script>
+  <script src="../js/app.js"></script>
+  <!-- bootsrap link -->
+  <script src="../js/jquery-3.4.1.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+</body>
+
+</html>

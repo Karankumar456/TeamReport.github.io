@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team/OverView</title>
+  <link rel="stylesheet" href="../css/style2.css">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 35%;
+    /* color: rgb(87, 87, 14); */
+  }
+
+  input {
+    width: 50%;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: rgb(255, 255, 255);
+    padding: 25px 10px 10px 0px;
+    margin-left: 15px;
+  }
+</style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: rgb(51, 174, 211)!important;">
+    <a class="navbar-brand" href="#"><b>Team Reporter</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="./home.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./TeamOverView.html">Team/Overview</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        <button type="submit " id="logoutBtn" onclick="logout() ">Logout</button>
+      </span>
+    </div>
+  </nav>
+
+
+  <div>
+    <h3 id="reports">Reports</h3>
+  </div>
+
+  <!-- footer -->
+  <footer>
+    <p>Designed by M.Areeb<br>
+      <a href="#">m.areebkhan125@gmail.com</a>
+    </p>
+  </footer>
+  <script>
+
+    (function () {
+      const d = new Date();
+      let date = d.getDate()
+      const month = new Array();
+      month[0] = "January";
+      month[1] = "February";
+      month[2] = "March";
+      month[3] = "April";
+      month[4] = "May";
+      month[5] = "June";
+      month[6] = "July";
+      month[7] = "August";
+      month[8] = "September";
+      month[9] = "October";
+      month[10] = "November";
+      month[11] = "December";
+      var n = month[d.getMonth()];
+      // console.log(date,n)
+
+      allDataKeys12 = Object.keys(sessionStorage);
+      allDataKeys12.map((key1) => {
+        var val12 = JSON.parse(sessionStorage.getItem(key1));
+        const teamname = val12.teamname;
+        const q1 = val12.q1;
+        const q2 = val12.q2;
+        const q3 = val12.q3;
+        const q4 = val12.q4;
+        const q5 = val12.q5;
+        //login user or member email matching
+        let loginperson = localStorage.getItem("Loginuser");
+        let loginpersonVal = JSON.parse(loginperson);
+        let a = loginpersonVal.person1
+
+        //get ans in localstorage
+        allDataKeys = Object.keys(localStorage);
+        allDataKeys.map((key) => {
+          var valans = JSON.parse(localStorage.getItem(key));
+          if (valans.hasOwnProperty("Studentname")) {
+            if (val12.user === a) {
+
+              let Sname = valans.Studentname
+              let a1 = valans.firstAns
+              let a2 = valans.secondAns
+              let a3 = valans.thirdAns
+              if (q1 == undefined || q2 == undefined || q3 == undefined) {
+                // let a1="no ans yet" 
+                // let a2="no ans yet"
+                // let a3="no ans yet"
+                // console.log("error")
+
+              } else {
+                let div = document.createElement("div");
+                div.style.marginTop = "10px";
+                // div.style.marginRight = "50px";
+                div.style.marginLeft = "50px";
+                div.style.marginBottom = "0%";
+                div.style.padding = "2px 0 40px 15px";
+                let ques1 = document.createElement("p")
+                ques1.style.padding = "20px 0 0px 15px"
+                ques1.innerHTML = (`Team Name:${teamname}<br><br>${Sname}:${date} ${n}<br/><br/>Q: ${q1}<br/>A: ${a1}<br/><br/> Q: ${q2}<br/>A: ${a2}<br/><br/> Q: ${q3}<br/>A:${a3}<br/>`)
+                div.appendChild(ques1)
+                document.body.appendChild(div)
+              }
+
+            }
+
+          }
+        })
+
+      })
+
+    })()
+
+  </script>
+  <script src="../js/app.js"></script>
+  <!-- bootsrap link -->
+  <script src="../js/jquery-3.4.1.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+</body>
+
+</html>
